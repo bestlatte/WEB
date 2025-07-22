@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>註冊表單</title>
+    <style>
+      body {
+        font-family: "Rubik", Arial, sans-serif;
+        background: #fff;
+        margin: 0;
+        min-height: 100vh;
+      }
+      .navbar {
+        width: 100%;
+        background: #fff;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 48px;
+        height: 72px;
+        box-sizing: border-box;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 10;
+      }
+      .navbar-left {
+        display: flex;
+        align-items: center;
+      }
+      .navbar .logo {
+        font-size: 2rem;
+        font-weight: bold;
+        letter-spacing: 2px;
+        color: #111;
+        text-decoration: none;
+      }
+      .nav-center {
+        display: flex;
+        align-items: center;
+        margin-left: 30px;
+      }
+      .nav-links {
+        display: flex;
+        gap: 32px;
+        align-items: center;
+      }
+      .navbar .nav-links a {
+        text-decoration: none;
+        color: #111;
+        font-size: 1rem;
+        font-weight: 500;
+        transition: color 0.2s;
+      }
+      .navbar .nav-links a:hover {
+        color: #007bff;
+      }
+      .navbar .actions {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+      }
+      .navbar .actions a {
+        text-decoration: none;
+        color: #111;
+        font-size: 1rem;
+        font-weight: bold;
+        transition: color 0.2s;
+      }
+      .navbar .icon {
+        font-size: 1.2rem;
+        cursor: pointer;
+        margin-left: 8px;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding-top: 100px;
+        box-sizing: border-box;
+      }
+      .register-card {
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: none;
+        padding: 48px 40px 36px 40px;
+        width: 100%;
+        max-width: 420px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .register-card h2 {
+        font-size: 40px;
+        font-weight: normal;
+        margin-bottom: 38px;
+        text-align: left;
+        margin-right: auto;
+      }
+      .form-group {
+        width: 100%;
+        margin-bottom: 22px;
+      }
+      label {
+        display: block;
+        margin-bottom: 19px;
+        font-weight: 500;
+        font-size: 1rem;
+      }
+      input[type="text"],
+      input[type="email"] {
+        width: 100%;
+        padding: 12px 14px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-sizing: border-box;
+        font-size: 1rem;
+        background: #fafbfc;
+        transition: border 0.2s;
+      }
+      input[type="text"]:focus,
+      input[type="email"]:focus {
+        border: 1.5px solid #007bff;
+        outline: none;
+      }
+      .gender-options {
+        display: flex;
+        gap: 24px;
+        margin-top: 4px;
+      }
+      .submit-btn {
+        width: 100%;
+        padding: 14px;
+        background: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: background 0.2s;
+      }
+      .submit-btn:hover {
+        background: #0056b3;
+      }
+      .disabled-btn {
+        background: #e5e1e1 !important;
+        color: #fff !important;
+        cursor: not-allowed !important;
+        border-radius: 16px !important;
+        font-size: 1.2rem !important;
+        font-weight: 500 !important;
+        margin-top: 32px !important;
+        letter-spacing: 1px;
+      }
+
+      /*=========== 頁尾 ============*/
+      .footer {
+        padding: 6rem 0 3rem 0;
+        margin-top: 9rem;
+        border-top: 1px solid #eee;
+        background: #fff;
+        font-size: 13px;
+        box-sizing: border-box;
+      }
+      .grid--footer {
+        display: grid;
+        grid-template-columns: 1.5fr 1.5fr 1fr 1fr 1fr;
+        gap: 3.2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        align-items: start;
+        box-sizing: border-box;
+        padding-left: 0;
+        padding-right: 0;
+      }
+      .logo-col {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .footer-logo {
+        display: block;
+        margin-bottom: 3.2rem;
+      }
+      .footer-logo img {
+        height: 4.8rem;
+        width: auto;
+      }
+      .social-links {
+        list-style: none;
+        display: flex;
+        gap: 2.4rem;
+        margin-bottom: 2.4rem;
+        padding: 0;
+      }
+      .social-icon {
+        height: 2.4rem;
+        width: 2.4rem;
+      }
+      .copyright {
+        font-size: 1.4rem;
+        line-height: 1.6;
+        color: #767676;
+        margin-top: auto;
+        margin-bottom: 0;
+      }
+      .footer-heading {
+        font-size: 1.8rem;
+        font-weight: 500;
+        margin-bottom: 2.4rem;
+        color: #222;
+      }
+      .contacts {
+        font-style: normal;
+        font-size: 1.6rem;
+        line-height: 1.6;
+      }
+      .address {
+        margin-bottom: 2.4rem;
+      }
+      .footer-nav {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 2.4rem;
+        padding: 0;
+      }
+      .footer-link:link,
+      .footer-link:visited {
+        text-decoration: none;
+        font-size: 1.6rem;
+        color: #767676;
+        transition: all 0.3s;
+      }
+      .footer-link:hover,
+      .footer-link:active {
+        color: #555;
+      }
+      @media (max-width: 1200px) {
+        .grid--footer {
+          grid-template-columns: 1fr 1fr 1fr;
+          padding-left: 2rem;
+          padding-right: 2rem;
+        }
+      }
+      @media (max-width: 900px) {
+        .grid--footer {
+          grid-template-columns: 1fr 1fr;
+          gap: 2.4rem;
+          padding-left: 2rem;
+          padding-right: 2rem;
+        }
+      }
+      @media (max-width: 600px) {
+        .grid--footer {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+        .footer {
+          padding: 2rem 0 1rem 0;
+          margin-top: 4rem;
+        }
+        .footer-logo {
+          margin-bottom: 1.2rem;
+        }
+        .footer-heading {
+          margin-bottom: 0.8rem;
+        }
+      }
+      /* =========================== */
+
+      @media (max-width: 600px) {
+        .navbar {
+          padding: 0 12px;
+        }
+        .register-card {
+          padding: 32px 8px;
+        }
+      }
+      .footer,
+      .footer * {
+        font-size: 13px !important;
+      }
+      .footer-nav {
+        width: 150px;
+        min-height: 130px;
+        align-items: flex-start;
+      }
+      .footer-link:link,
+      .footer-link:visited {
+        font-size: 13px !important;
+      }
+      .footer-heading {
+        font-size: 13.5px !important;
+        font-weight: bold !important;
+      }
+      .contacts,
+      .address,
+      .copyright {
+        font-size: 13px !important;
+      }
+      .password-wrapper {
+        position: relative;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        background: #fafbfc;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-sizing: border-box;
+        margin-top: 0.5rem;
+      }
+      .password-wrapper input[type="password"] {
+        border: none;
+        background: transparent;
+        width: 100%;
+        padding: 12px 40px 12px 14px;
+        font-size: 1rem;
+        outline: none;
+      }
+      .password-wrapper input[type="password"]:focus {
+        border: none;
+        outline: none;
+      }
+      .toggle-password {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #888;
+        cursor: pointer;
+        font-size: 1.3rem;
+      }
+      .forgot-link {
+        color: #111;
+        text-decoration: underline;
+        cursor: pointer;
+        transition: color 0.2s;
+        text-underline-offset: 0.3em;
+      }
+      .forgot-link:hover {
+        color: #888;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar-left">
+        <a href="#" class="logo">快電商</a>
+        <div class="nav-center">
+          <div class="nav-links">
+            <a href="#">全部分類</a>
+            <a href="#">主題</a>
+            <a href="#">公益關懷</a>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <a href="#">登入</a>
+        <a href="#">註冊</a>
+        <span class="icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-6"
+            style="width: 1.5em; height: 1.5em; vertical-align: middle"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+            />
+          </svg>
+        </span>
+        <span class="icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-6"
+            style="width: 1.5em; height: 1.5em; vertical-align: middle"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+            />
+          </svg>
+        </span>
+      </div>
+    </nav>
+    <div class="container">
+      <form class="register-card">
+        <h2 class="form-title">歡迎回來！</h2>
+        <div class="form-group">
+          <label for="email">電子信箱<span style="color: #d00">＊</span></label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="輸入電子信箱"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">密碼<span style="color: #d00">＊</span></label>
+          <div class="password-wrapper">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="輸入密碼"
+              required
+            />
+            <span class="toggle-password">
+              <ion-icon name="eye-off-outline"></ion-icon>
+            </span>
+          </div>
+          <div
+            style="
+              text-align: right;
+              margin-top: 8px;
+              font-weight: bold;
+              font-size: 15px;
+            "
+          >
+            <a href="#" class="forgot-link">忘記密碼？</a>
+          </div>
+        </div>
+        <button type="button" class="submit-btn disabled-btn" disabled>
+          使用電子信箱登入
+        </button>
+      </form>
+    </div>
+
+    <!-- 頁尾 -->
+    <footer class="footer">
+      <div class="container grid grid--footer">
+        <div class="logo-col">
+          <a href="#" class="footer-logo">
+            <img
+              class="logo"
+              alt="FITFORGE logo"
+              src="./gym_img/gymLogo3.0.png"
+            />
+          </a>
+          <ul class="social-links">
+            <li>
+              <a class="footer-link" href="#"
+                ><ion-icon class="social-icon" name="logo-instagram"></ion-icon
+              ></a>
+            </li>
+            <li>
+              <a class="footer-link" href="#"
+                ><ion-icon class="social-icon" name="logo-facebook"></ion-icon
+              ></a>
+            </li>
+            <li>
+              <a class="footer-link" href="#"
+                ><ion-icon class="social-icon" name="logo-twitter"></ion-icon
+              ></a>
+            </li>
+          </ul>
+          <p class="copyright">
+            Copyright &copy; 2025 by FITFORGE<br />All rights reserved.
+          </p>
+        </div>
+        <div class="address-col">
+          <p class="footer-heading">聯絡我們</p>
+          <address class="contacts">
+            <p class="address">623健身館 台北市信義區松高路99號2樓</p>
+            <p>
+              <a class="footer-link" href="tel:02-2010-7777">02-2010-7777</a
+              ><br />
+              <a class="footer-link" href="mailto:hello@fitforge.tw"
+                >hello@fitforge.tw</a
+              >
+            </p>
+          </address>
+        </div>
+        <nav class="nav-col">
+          <p class="footer-heading">會員帳號</p>
+          <ul class="footer-nav">
+            <li><a class="footer-link" href="#">註冊會員</a></li>
+            <li><a class="footer-link" href="#">會員登入</a></li>
+            <!-- <li><a class="footer-link" href="#">iOS app</a></li>
+            <li><a class="footer-link" href="#">Android app</a></li> -->
+          </ul>
+        </nav>
+        <nav class="nav-col">
+          <p class="footer-heading">關於我們</p>
+          <ul class="footer-nav">
+            <li><a class="footer-link" href="#">認識快電商</a></li>
+            <li><a class="footer-link" href="#">企業方案</a></li>
+            <li><a class="footer-link" href="#">合作招募</a></li>
+            <li><a class="footer-link" href="#">加入我們</a></li>
+          </ul>
+        </nav>
+        <nav class="nav-col">
+          <p class="footer-heading">資源中心</p>
+          <ul class="footer-nav">
+            <li><a class="footer-link" href="#">海外配銷</a></li>
+            <li><a class="footer-link" href="#">服務條款</a></li>
+            <li><a class="footer-link" href="#">聯絡客服</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+    <!-- ionicon-icon導入 -->
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule=""
+      src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"
+    ></script>
+    <script
+      defer
+      src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"
+    ></script>
+  </body>
+</html>
